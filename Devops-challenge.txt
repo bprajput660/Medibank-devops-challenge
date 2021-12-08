@@ -1,0 +1,21 @@
+import os
+rootDirectory = 'C:/Users/agc/Documents/Load Test Results & Analysis'
+
+d = dict()
+for subdir, dirs, files in os.walk(rootDirectory):
+    for file in files:
+        if file.endswith(".txt"):
+            #print(os.path.join(subdir, file))
+            text = open(os.path.join(subdir, file), "r")            
+            for line in text:                
+                line = line.strip()                
+                line = line.lower()                
+                words = line.split(" ")                
+                for word in words:                    
+                    if word in d:                        
+                        d[word] = d[word] + 1
+                    else:                        
+                        d[word] = 1
+
+for key in list(d.keys()):
+    print(key, ":", d[key])
